@@ -1,13 +1,13 @@
 <template>
   <div class="home">
     <h3>Mis paneles</h3>
+    <input
+      type="text"
+      placeholder="Añade un nuevo panel"
+      v-model="boardName"
+      @keyup.enter="add()"
+    />
     <div class="boards-collection">
-      <input
-        type="text"
-        placeholder="Añade un nuevo panel"
-        v-model="boardName"
-        @keyup.enter="add()"
-      />
       <BoardCard
         v-for="board in boards"
         :key="board.id"
