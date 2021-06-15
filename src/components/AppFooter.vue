@@ -1,6 +1,9 @@
 <template>
   <footer>
-    <span> App creada con <a href="//vuejs.or"> Vue.js </a> en Madrid </span>
+    <span>
+      App creada con <a href="//vuejs.org" target="_blank"> Vue.js </a> en
+      Madrid
+    </span>
   </footer>
 </template>
 
