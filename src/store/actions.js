@@ -53,7 +53,7 @@ export default {
 
   markAsCompleted({ commit }, { task }) {
     api
-      .completedTask(taks.id)
+      .completedTask(task.id)
       .then(() => commit(types.MARK_AS_COMPLETED, { task }));
   },
 };
