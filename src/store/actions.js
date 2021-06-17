@@ -1,5 +1,5 @@
 import * as types from "./mutations-types";
-import api from "@api";
+import api from "@/api";
 
 export default {
   //fetch via Ajax de los paneles del usuario
