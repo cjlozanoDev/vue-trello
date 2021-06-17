@@ -1,15 +1,56 @@
 import { db } from "./firebase";
 
-const boardRef = db.ref("/boards");
+const boardsRef = db.ref("/boards");
 const listsRef = db.ref("/lists");
 const tasksRef = db.ref("/tasks");
 
 export default {
-  postBoard(name) {},
-  getListFromBoard(boardId) {},
-  postList(board, name) {},
-  getTasksFromList(listId) {},
-  postTasks(list, title) {},
-  deleteTask(taskId) {},
-  completeTask(taskId) {},
+  getBoardsByUser(userId = 1) {
+    const query = boardsRef.orderByChild("owner").equalTo(userId);
+    return query.once("value");
+  },
+  postBoard(name, owner = 1) {
+    const id = boardsRef.push().key;
+    const board = { id, name, owner };
+
+    return boardsRef
+      .child(id)
+      .set(board)
+      .then(() => board);
+  },
+  getListFromBoard(boardId) {
+    const query = listsRef.orderByChild("board").equalTo(boardId);
+    return query.once("value");
+  },
+  postList(board, name) {
+    const id = listsRef.push().key;
+    const column = { id, name, board };
+    return listsRef
+      .child(id)
+      .set(column)
+      .then(() => column);
+  },
+  getTasksFromList(listId) {
+    const query = tasksRef.orderByChild("list").equalTo(listId);
+    return query.once("value");
+  },
+  postTasks(list, title) {
+    const id = tasksRef.push().key;
+    const task = { id, list, title, completed: false };
+
+    return tasksRef
+      .child(id)
+      .set(task)
+      .then(() => task);
+  },
+  deleteTask(taskId) {
+    return tasksRef.child(taskId).remove();
+  },
+  completeTask(taskId) {
+    const query = tasksRef.child(taskId).child("completed");
+    return query
+      .once("value")
+      .then((snap) => snap.value)
+      .then((data) => query.set(!data));
+  },
 };
