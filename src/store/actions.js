@@ -20,18 +20,18 @@ export default {
 
     api
       .getListsFromBoard(board)
-      .then((snap) => commit(types.FETCH_LISTS_SUCCESS, { lists: snap.val }))
+      .then((snap) => commit(types.FETCH_LISTS_SUCCESS, { lists: snap.val() }))
       .catch((error) => commit(types.FETCH_LISTS_FAILURE, { error }));
   },
 
   //fetch via Ajax de las tareas de una lista
 
-  fechtTasks({ commit }, { list }) {
+  fetchTasks({ commit }, { list }) {
     commit(types.FETCH_TASKS_REQUEST);
 
     api
       .getTasksFromList(list)
-      .then((snap) => commit(types.FETCH_TASKS_SUCCESS, { task: snap.val }))
+      .then((snap) => commit(types.FETCH_TASKS_SUCCESS, { task: snap.val() }))
       .catch((error) => commit(types.FETCH_TASKS_FAILURE, { error }));
   },
 

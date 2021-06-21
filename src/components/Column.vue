@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import TaskList from "./TaskList.vue";
 
 export default {
@@ -21,25 +22,21 @@ export default {
       default: "",
     },
     listId: {
-      type: Number,
-      default: 0,
+      type: String,
+      default: "0",
     },
   },
-  data() {
-    return {
-      tasksList: [
-        {
-          id: "1",
-          title: "Aprender Vue",
-          completed: false,
-        },
-        {
-          id: "2",
-          title: "Aprender Vuex",
-          completed: false,
-        },
-      ],
-    };
+  created() {
+    this.fetchTasks({ list: this.listId });
+  },
+  computed: {
+    ...mapGetters(["getTasksFromList"]),
+    tasksList() {
+      return this.getTasksFromList(this.listId);
+    },
+  },
+  methods: {
+    ...mapActions(["fetchTasks"]),
   },
 };
 </script>
