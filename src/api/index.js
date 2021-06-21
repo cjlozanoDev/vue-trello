@@ -46,11 +46,11 @@ export default {
   deleteTask(taskId) {
     return tasksRef.child(taskId).remove();
   },
-  completeTask(taskId) {
+  completedTask(taskId) {
     const query = tasksRef.child(taskId).child("completed");
     return query
       .once("value")
-      .then((snap) => snap.value)
+      .then((snap) => snap.val())
       .then((data) => query.set(!data));
   },
 };

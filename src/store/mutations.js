@@ -77,6 +77,6 @@ export default {
 
   //Mutacion que marca como completada una tarea
   [types.MARK_AS_COMPLETED](state, { task }) {
-    task.completd = !task.completed;
+    task.completed = !task.completed;
   },
 };

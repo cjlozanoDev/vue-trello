@@ -31,7 +31,7 @@ export default {
 
     api
       .getTasksFromList(list)
-      .then((snap) => commit(types.FETCH_TASKS_SUCCESS, { task: snap.val() }))
+      .then((snap) => commit(types.FETCH_TASKS_SUCCESS, { tasks: snap.val() }))
       .catch((error) => commit(types.FETCH_TASKS_FAILURE, { error }));
   },
 

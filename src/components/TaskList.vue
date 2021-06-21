@@ -3,6 +3,7 @@
     <li
       v-for="task in tasks"
       :key="task.id"
+      @click="markAsCompleted({ task })"
       :class="{ completed: task.completed }"
     >
       {{ task.title }}
@@ -17,12 +18,18 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "TaskList",
   props: {
     tasks: {
       type: Array,
       default: () => {},
+    },
+    listId: {
+      type: String,
+      default: "",
     },
   },
   data() {
@@ -31,8 +38,10 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["addTask", "markAsCompleted"]),
     add() {
-      //todo
+      this.addTask({ list: this.listId, title: this.title });
+      this.title = "";
     },
   },
 };
@@ -51,7 +60,7 @@ li {
   margin: 0.25rem 0;
   padding: 1rem;
 }
-li .completed {
+.completed {
   background-color: #cfd8dc;
   color: #90a4ae;
 }
