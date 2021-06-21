@@ -18,7 +18,7 @@ export default {
       .set(board)
       .then(() => board);
   },
-  getListFromBoard(boardId) {
+  getListsFromBoard(boardId) {
     const query = listsRef.orderByChild("board").equalTo(boardId);
     return query.once("value");
   },
