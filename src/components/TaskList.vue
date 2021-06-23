@@ -4,6 +4,7 @@
       v-for="task in tasks"
       :key="task.id"
       @click="markAsCompleted({ task })"
+      @dblclick="deleteTask({ taskId: task.id })"
       :class="{ completed: task.completed }"
     >
       {{ task.title }}
@@ -38,7 +39,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["addTask", "markAsCompleted"]),
+    ...mapActions(["addTask", "markAsCompleted", "deleteTask"]),
     add() {
       this.addTask({ list: this.listId, title: this.title });
       this.title = "";

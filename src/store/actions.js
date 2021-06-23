@@ -48,7 +48,7 @@ export default {
     api.postTasks(list, title).then((task) => commit(types.ADD_TASK, { task }));
   },
   deleteTask({ commit }, { taskId }) {
-    api.deleteTask(taskId).then(() => commit(types.DELETE_TASK), { taskId });
+    api.deleteTask(taskId).then(() => commit(types.DELETE_TASK, { taskId }));
   },
 
   markAsCompleted({ commit }, { task }) {
